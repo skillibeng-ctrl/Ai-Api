@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/key.css">
+</head>
+<body>
+    <div class="try">
+        <h1>Random User API</h1>
+        <div class="result">
+            <p class="loading">Click the button to fetch a random user...</p>
+        </div>
+        <button id="fetchUser">Get Random User</button>
+    </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultDiv = document.querySelector('.result');
+            const fetchButton = document.getElementById('fetchUser');
+            
+            fetchButton.addEventListener('click', fetchRandomUser);
+            
+            function fetchRandomUser() {
+                // Show loading state
+                resultDiv.innerHTML = '<p class="loading">Loading user data...</p>';
+                
+                fetch('https://randomuser.me/api/')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const user = data.results[0];
+                        displayUser(user);
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                        console.error('Error fetching user:', error);
+                    });
+            }
+            
+            function displayUser(user) {
+                const userHTML = `
+                    <div class="user-card">
+                        <img src="${user.picture.large}" alt="User Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <h2 class="user-name">${user.name.first} ${user.name.last}</h2>
+                            <p class="user-details"><strong>Email:</strong> ${user.email}</p>
+                            <p class="user-details"><strong>Phone:</strong> ${user.phone}</p>
+                            <p class="user-details"><strong>Location:</strong> ${user.location.city}, ${user.location.country}</p>
+                            <p class="user-details"><strong>Gender:</strong> ${user.gender}</p>
+                            <p class="user-details"><strong>Age:</strong> ${user.dob.age}</p>
+                        </div>
+                    </div>
+                `;
+                resultDiv.innerHTML = userHTML;
+            }
+            
+            // Optional: Fetch a user immediately when page loads
+            // fetchRandomUser();
+        });
+    </script>
+</body>
+</html>

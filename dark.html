@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journalist's Guide to the Dark Web</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --warning: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+        }
+        
+        .warning-box {
+            background-color: #f8d7da;
+            border-left: 5px solid var(--warning);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .tip-box {
+            background-color: #e7f5fe;
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .step {
+            background-color: var(--light);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .resource-card {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--secondary);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .resources {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Journalist's Guide to the Dark Web</h1>
+            <p>Secure research methods for investigative reporting</p>
+        </header>
+        
+        <div class="warning-box">
+            <strong>Important Warning:</strong> The dark web contains both valuable resources and significant risks. Journalists should proceed with caution, follow all applicable laws, and consult with their organization's security team before beginning dark web research.
+        </div>
+        
+        <h2>Understanding the Dark Web</h2>
+        <p>The dark web is a small portion of the deep web that requires special software to access. For journalists, it offers:</p>
+        <ul>
+            <li>Secure communication with whistleblowers and sources</li>
+            <li>Access to information from censored regions</li>
+            <li>Alternative perspectives on news events</li>
+            <li>Research into cybercrime and illicit markets (for investigative purposes)</li>
+        </ul>
+        
+        <h2>Essential Safety Precautions</h2>
+        <div class="tip-box">
+            <strong>Journalistic Best Practice:</strong> Always maintain a separate research device or virtual machine for dark web activities to avoid compromising your primary work environment.
+        </div>
+        <ul>
+            <li>Never use personal information or credentials</li>
+            <li>Assume all activity could be monitored by adversaries</li>
+            <li>Verify all information through multiple sources</li>
+            <li>Understand your legal protections and limitations</li>
+        </ul>
+        
+        <h2>Step-by-Step Access Guide</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <h3>Install the Tor Browser</h3>
+            <p>Download from the official Tor Project website: <a href="https://www.torproject.org" target="_blank">torproject.org</a></p>
+            <p>Always verify the download's PGP signature (instructions provided on Tor site).</p>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <h3>Configure Security Settings</h3>
+            <p>After installation:</p>
+            <ul>
+                <li>Click the security settings (shield icon)</li>
+                <li>Set to "Safest" level for maximum protection</li>
+                <li>Disable JavaScript (can be re-enabled temporarily for specific sites)</li>
+                <li>Consider using a VPN before launching Tor (consult your IT team)</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <h3>Understand Onion Addresses</h3>
+            <p>Dark web sites use <code>.onion</code> addresses (e.g., <code>protonmailrmez3lotccipshtkleegetolb73fuirgj7r4o4vfu7ozyd.onion</code>).</p>
+            <p>These are only accessible through Tor and provide end-to-end encryption.</p>
+        </div>
+        
+        <h2>Journalistic Resources</h2>
+        
+        <div class="resources">
+            <div class="resource-card">
+                <h3>SecureDrop</h3>
+                <p>Whistleblower submission system used by major news organizations. Find your outlet's SecureDrop portal or explore the directory.</p>
+            </div>
+            
+            <div class="resource-card">
+                <h3>Dark Web News Outlets</h3>
+                <p>Many mainstream organizations have onion versions:
+                <ul>
+                    <li>BBC Tor Mirror</li>
+                    <li>ProPublica</li>
+                    <li>The New York Times</li>
+                </ul>
+                </p>
+            </div>
+            
+            <div class="resource-card">
+                <h3>Verified Directories</h3>
+                <p>Reliable starting points:
+                <ul>
+                    <li>Dark.fail (verifies official URLs)</li>
+                    <li>Dread (forum with journalist sections)</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        
+        <h2>Ethical Guidelines</h2>
+        <ul>
+            <li>Focus on information in the public interest, not sensationalism</li>
+            <li>Never participate in or facilitate illegal activities</li>
+            <li>Protect vulnerable sources while verifying their information</li>
+            <li>Consider the potential consequences of your reporting</li>
+            <li>Maintain professional detachment</li>
+        </ul>
+        
+        <div class="tip-box">
+            <strong>Remember:</strong> The dark web is a research tool, not a story in itself. Your journalism should focus on verified information and its public value, not the method of discovery.
+        </div>
+        
+        <footer>
+            <p>This guide is for educational purposes only. Journalists should comply with all applicable laws and organizational policies.</p>
+            <p>Last updated: June 2023</p>
+        </footer>
+    </div>
+</body>
+</html>

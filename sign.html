@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        /* Overlay styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Form container */
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your main page content -->
+    <div class="main-content">
+        <h1>Welcome to Our Website</h1>
+        <p>Check out our amazing products!</p>
+        
+        <!-- Buy button - will be hidden after showing the form -->
+        <button id="buyButton" class="primary-btn">Buy Now</button>
+    </div>
+    
+    <!-- Overlay form -->
+    <div id="formOverlay" class="overlay">
+        <div class="form-container">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <h2>Create Account to Purchase</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                </div>
+                <button type="submit">Sign Up & Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buyButton = document.getElementById('buyButton');
+            const formOverlay = document.getElementById('formOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            const signupForm = document.getElementById('signupForm');
+            
+            // Check localStorage to see if user has already seen the form
+            if (localStorage.getItem('formShown') === 'true') {
+                buyButton.classList.add('hidden');
+            }
+            
+            // Show form when buy button is clicked
+            buyButton.addEventListener('click', function() {
+                formOverlay.style.display = 'flex';
+                localStorage.setItem('formShown', 'true');
+            });
+            
+            // Close form when X is clicked
+            closeBtn.addEventListener('click', function() {
+                formOverlay.style.display = 'none';
+            });
+            
+            // Close form when clicking outside the form
+            formOverlay.addEventListener('click', function(e) {
+                if (e.target === formOverlay) {
+                    formOverlay.style.display = 'none';
+                }
+            });
+            
+            // Handle form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Simple validation
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                // In a real app, you would send this data to your server
+                console.log('Form submitted:', { name, email, password });
+                
+                // Store user data in localStorage (not secure for production)
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                
+                // Hide the form
+                formOverlay.style.display = 'none';
+                
+                // Show success message
+                alert('Account created successfully! You can now login.');
+                
+                // In a real app, you would redirect or update the UI
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            });
+            
+            // Check if user is logged in
+            if (localStorage.getItem('userLoggedIn') === 'true') {
+                buyButton.textContent = 'Continue Shopping';
+                // Modify button behavior for logged in users
+                buyButton.addEventListener('click', function() {
+                    window.location.href = 'products.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

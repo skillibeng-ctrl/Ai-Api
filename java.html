@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Polymorphism Visualizer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .code-container {
+            flex: 1;
+            min-width: 300px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .code-header {
+            background: #3a3a3a;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-title {
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        .code-content {
+            padding: 20px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre;
+            overflow-x: auto;
+            height: 500px;
+            color: #d4d4d4;
+            scrollbar-width: none ;
+        }
+        
+        .visualization {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .visual-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 1.5rem;
+        }
+        
+        .hierarchy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .class-box {
+            width: 200px;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .class-a {
+            background: #3498db;
+            box-shadow: 0 4px 0 #2980b9;
+        }
+        
+        .class-b {
+            background: #2ecc71;
+            box-shadow: 0 4px 0 #27ae60;
+            margin-top: 40px;
+        }
+        
+        .class-c {
+            background: #e74c3c;
+            box-shadow: 0 4px 0 #c0392b;
+            margin-top: 40px;
+        }
+        
+        .inheritance-arrow {
+            position: absolute;
+            width: 2px;
+            background: #fff;
+            height: 40px;
+            top: -40px;
+            left: 50%;
+        }
+        
+        .inheritance-arrow::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transform: rotate(135deg);
+        }
+        
+        .output {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .output-title {
+            color: #ffcc00;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .output-content {
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre;
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            background: #ffcc00;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 #cc9900;
+        }
+        
+        button:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #cc9900;
+        }
+        
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #cc9900;
+        }
+        
+        .explanation {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .explanation h2 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            background: rgba(255, 204, 0, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Java Polymorphism Visualizer</h1>
+            <p class="subtitle">Understanding inheritance, method overriding, and type casting in Java</p>
+        </header>
+        
+        <div class="content">
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-title">Java Code</div>
+                </div>
+                <div class="code-content">class A {
+    void show() {
+        System.out.println("A.show");
+    }
+}
+
+class B extends A {
+    @Override
+    void show() {
+        System.out.println("B.show");
+    }
+    void onlyB() {
+        System.out.println("B.onlyB");
+    }
+}
+
+class C extends B {
+    @Override
+    void show() {
+        System.out.println("C.show");
+    }
+    void onlyC() {
+        System.out.println("C.onlyC");
+    }
+}
+
+public class Boss {
+    public static void main(String[] args) {
+        A ref = new C();   // 👀 Object is C, reference is A
+        ref.show();        // (1)
+        
+        B refB = (B) ref;  // 👀 legal downcast
+        refB.show();       // (2)
+        refB.onlyB();      // (3)
+
+        C refC = (C) refB; // 👀 legal, since actual object IS C
+        refC.show();       // (4)
+        refC.onlyC();      // (5)
+
+        A refA = new A();
+        C crash = (C) refA;  // 👀 boom?
+        crash.show();        // (6)
+    }
+}</div>
+            </div>
+            
+            <div class="visualization">
+                <h2 class="visual-title">Class Hierarchy</h2>
+                
+                <div class="hierarchy">
+                    <div class="class-box class-c">
+                        <div class="inheritance-arrow"></div>
+                        <h3>Class C</h3>
+                        <p>extends B</p>
+                        <p>show() [Overrides]</p>
+                        <p>onlyC()</p>
+                    </div>
+                    
+                    <div class="class-box class-b">
+                        <div class="inheritance-arrow"></div>
+                        <h3>Class B</h3>
+                        <p>extends A</p>
+                        <p>show() [Overrides]</p>
+                        <p>onlyB()</p>
+                    </div>
+                    
+                    <div class="class-box class-a">
+                        <h3>Class A</h3>
+                        <p>show()</p>
+                    </div>
+                </div>
+                
+                <div class="output">
+                    <h3 class="output-title">Program Output</h3>
+                    <div class="output-content" id="output">Click "Run Code" to see output</div>
+                </div>
+                
+                <div class="controls">
+                    <button id="run-btn">Run Code</button>
+                    <button id="reset-btn">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="explanation">
+            <h2>Polymorphism Concepts Explained</h2>
+            <p><span class="highlight">Polymorphism</span> allows objects of different classes to be treated as objects of a common superclass.</p>
+            <p>In this example:</p>
+            <ul>
+                <li><span class="highlight">A ref = new C();</span> - We create a C object but reference it with an A-type variable</li>
+                <li><span class="highlight">ref.show();</span> - Calls C's show() method due to runtime polymorphism (output: "C.show")</li>
+                <li><span class="highlight">Downcasting</span> - We cast the A-type reference to B and then to C, which is safe because the actual object is C</li>
+                <li><span class="highlight">ClassCastException</span> - The last cast (C crash = (C) refA;) will fail at runtime because refA refers to an A object, not a C object</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const outputElement = document.getElementById('output');
+            const runButton = document.getElementById('run-btn');
+            const resetButton = document.getElementById('reset-btn');
+            
+            runButton.addEventListener('click', function() {
+                outputElement.innerHTML = '';
+                
+                // Simulate the Java code execution
+                outputElement.innerHTML += 'A ref = new C();\n';
+                outputElement.innerHTML += 'ref.show(); // (1)\n';
+                outputElement.innerHTML += 'C.show\n\n';
+                
+                outputElement.innerHTML += 'B refB = (B) ref;\n';
+                outputElement.innerHTML += 'refB.show(); // (2)\n';
+                outputElement.innerHTML += 'C.show\n\n';
+                
+                outputElement.innerHTML += 'refB.onlyB(); // (3)\n';
+                outputElement.innerHTML += 'B.onlyB\n\n';
+                
+                outputElement.innerHTML += 'C refC = (C) refB;\n';
+                outputElement.innerHTML += 'refC.show(); // (4)\n';
+                outputElement.innerHTML += 'C.show\n\n';
+                
+                outputElement.innerHTML += 'refC.onlyC(); // (5)\n';
+                outputElement.innerHTML += 'C.onlyC\n\n';
+                
+                outputElement.innerHTML += 'A refA = new A();\n';
+                outputElement.innerHTML += 'C crash = (C) refA; // 👀 This will cause an exception\n';
+                outputElement.innerHTML += '<span class="error">Exception in thread "main" java.lang.ClassCastException: class A cannot be cast to class C</span>\n';
+            });
+            
+            resetButton.addEventListener('click', function() {
+                outputElement.innerHTML = 'Click "Run Code" to see output';
+            });
+        });
+    </script>
+</body>
+</html>

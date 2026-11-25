@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexora — One API. Every AI model.</title>
+  <meta name="description" content="One unified API for chat, images, audio, and embeddings. Route across GPT-4, Claude, Llama, and 200+ models with built-in failover, caching, and observability." />
+  <meta name="theme-color" content="#080B14" />
+  <meta property="og:title" content="Nexora — One API. Every AI model." />
+  <meta property="og:description" content="Ship AI features in hours, not months. One API for every model." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&h=630&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32'%3E%3Cstop stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M10 22V10l12 12V10' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="./ccc.css" />
+  <script defer src="./app.js"></script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Nexora",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Unified AI API for chat, images, audio, and embeddings across 200+ models.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HEADER / NAVIGATION
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="./home.html" class="brand" aria-label="Nexora home">
+        <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="32" y2="32">
+              <stop stop-color="#a78bfa" />
+              <stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="8" fill="url(#brandGrad)" />
+          <path d="M10 22V10l12 12V10" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-text">Nexora</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#capabilities">Products</a></li>
+          <li><a href="./docs.html">Documentation</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#playground-preview">Playground</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="./signin.html" class="sign-in">Sign in</a>
+        <button type="button" class="btn-primary" id="getStartedBtn" aria-haspopup="dialog">
+          Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN
+       ═══════════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ─────────── HERO ─────────── -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            New · GPT-4o + Claude 3.5 now in production
+          </span>
+
+          <h1 class="hero-title">
+            Build the future with
+            <span class="gradient">intelligent APIs</span>.
+          </h1>
+
+          <p class="hero-subtitle">
+            One unified API for every AI model. Chat, images, audio, embeddings —
+            with built-in routing, failover, and observability.
+            Ship AI features in hours, not months.
+          </p>
+
+          <div class="hero-actions">
+            <button type="button" class="btn-primary btn-lg" data-open-signup aria-haspopup="dialog">
+              Get Started Free
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+            <a href="./docs.html" class="btn-secondary btn-lg">
+              <i class="fa-solid fa-book" aria-hidden="true"></i>
+              Explore Documentation
+            </a>
+          </div>
+
+          <p class="hero-note">
+            <i class="fa-solid fa-check" aria-hidden="true"></i> No credit card required
+            <span class="dot-sep">·</span>
+            <i class="fa-solid fa-check" aria-hidden="true"></i> 10k free tokens / month
+          </p>
+        </div>
+
+        <div class="hero-code">
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="code-filename">
+                <i class="fa-solid fa-code" aria-hidden="true"></i> quickstart.js
+              </span>
+              <button class="copy-btn" type="button">
+                <i class="fa-regular fa-copy" aria-hidden="true"></i> Copy
+              </button>
+            </div>
+            <pre class="code-body"><code><span class="k">const</span> response = <span class="k">await</span> <span class="f">fetch</span>(
+  <span class="s">"https://api.nexora.ai/v1/chat"</span>, {
+    method: <span class="s">"POST"</span>,
+    headers: {
+      <span class="s">"Authorization"</span>: <span class="t">`Bearer ${process.env.NEXORA_KEY}`</span>,
+      <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>
+    },
+    body: <span class="f">JSON</span>.<span class="f">stringify</span>({
+      model: <span class="s">"gpt-4o"</span>,
+      messages: [{
+        role: <span class="s">"user"</span>,
+        content: <span class="s">"Hello, AI!"</span>
+      }]
+    })
+  }
+);
+
+<span class="k">const</span> data = <span class="k">await</span> response.<span class="f">json</span>();
+<span class="c">// → { content: "Hi! How can I help you today?" }</span></code></pre>
+          </div>
+
+          <div class="hero-code-glow" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── TRUST BAR / STATS ─────────── -->
+    <section class="trust-bar" aria-label="Platform stats">
+      <p class="trust-label">Trusted by developers at</p>
+      <div class="trust-stats">
+        <div class="stat">
+          <div class="stat-value">200+</div>
+          <div class="stat-label">AI models</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-value">99.99%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-value">50ms</div>
+          <div class="stat-label">Median latency</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-value">10M+</div>
+          <div class="stat-label">Requests / day</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── CAPABILITIES (BENTO) ─────────── -->
+    <section id="capabilities" class="section">
+      <div class="section-head">
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title">One API. Every capability.</h2>
+        <p class="section-lead">
+          Stop managing a dozen providers. Nexora routes every request to the
+          best model, handles failures, and gives you one consistent interface.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <article class="bento-card bento-lg">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <h3>AI Chat API</h3>
+          <p>Streaming chat completions across GPT-4o, Claude 3.5, Llama 3.1, Mistral, and more — one endpoint, one schema.</p>
+          <div class="bento-tags">
+            <span class="tag">GPT-4o</span>
+            <span class="tag">Claude 3.5</span>
+            <span class="tag">Llama 3.1</span>
+            <span class="tag">Mistral</span>
+          </div>
+        </article>
+
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-image"></i>
+          </div>
+          <h3>Image Generation</h3>
+          <p>DALL·E 3, Stable Diffusion XL, Flux — same call signature.</p>
+        </article>
+
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-microphone"></i>
+          </div>
+          <h3>Speech API</h3>
+          <p>Whisper transcription and ElevenLabs synthesis in one call.</p>
+        </article>
+
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-vector-square"></i>
+          </div>
+          <h3>Embeddings</h3>
+          <p>Text and image embeddings with automatic batching and caching.</p>
+        </article>
+
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h3>Vector Search</h3>
+          <p>Managed vector storage with sub-10ms similarity search.</p>
+        </article>
+
+        <article class="bento-card bento-lg bento-accent">
+          <div class="bento-icon" aria-hidden="true">
+            <i class="fa-solid fa-shuffle"></i>
+          </div>
+          <h3>Smart Routing &amp; Failover</h3>
+          <p>Automatic retries, provider failover, and cost-optimal model selection based on your constraints. Built-in rate limiting and request caching.</p>
+          <div class="bento-meta">
+            <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 99.99% uptime</span>
+            <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> &lt;50ms overhead</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─────────── PLAYGROUND PREVIEW ─────────── -->
+    <section id="playground-preview" class="section section-alt">
+      <div class="section-head">
+        <span class="eyebrow">Playground</span>
+        <h2 class="section-title">Try it in your browser.</h2>
+        <p class="section-lead">
+          No signup, no API key. Pick a model, write a prompt, and see the shape
+          of the response you'll get back.
+        </p>
+      </div>
+
+      <div class="playground">
+        <div class="playground-panel playground-input-panel">
+          <div class="playground-field">
+            <label for="playground-model">Model</label>
+            <select id="playground-model">
+              <option value="gpt-4o">gpt-4o · OpenAI</option>
+              <option value="claude-3.5-sonnet">claude-3.5-sonnet · Anthropic</option>
+              <option value="llama-3.1-70b">llama-3.1-70b · Meta</option>
+              <option value="mistral-large">mistral-large · Mistral</option>
+            </select>
+          </div>
+
+          <div class="playground-field">
+            <label for="playground-prompt">Prompt</label>
+            <textarea id="playground-prompt" rows="6" placeholder="Explain vector embeddings like I'm five…">Explain vector embeddings like I'm five.</textarea>
+          </div>
+
+          <div class="playground-controls">
+            <div class="slider-wrap">
+              <label for="playground-temp">Temperature: <span id="temp-value">0.7</span></label>
+              <input id="playground-temp" type="range" min="0" max="1" step="0.1" value="0.7" />
+            </div>
+          </div>
+
+          <button id="playground-run" type="button" class="btn-primary btn-full">
+            <i class="fa-solid fa-play" aria-hidden="true"></i>
+            Run request
+          </button>
+        </div>
+
+        <div class="playground-panel playground-output-panel">
+          <div class="playground-output-header">
+            <span class="output-label">
+              <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+              Response
+            </span>
+            <button class="copy-btn" type="button" id="playground-copy">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i> Copy
+            </button>
+          </div>
+          <pre id="playground-output-content" class="playground-output-content"><span class="muted">// Click "Run request" to see output</span></pre>
+          <div class="playground-meta">
+            <span>Model: <strong id="meta-model">gpt-4o</strong></span>
+            <span>Latency: <strong id="meta-latency">—</strong></span>
+            <span>Tokens: <strong id="meta-tokens">—</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── HOW IT WORKS ─────────── -->
+    <section class="section">
+      <div class="section-head section-head-center">
+        <span class="eyebrow">Getting started</span>
+        <h2 class="section-title">Ship in 3 steps.</h2>
+        <p class="section-lead">From zero to production-ready AI in under 5 minutes.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div class="step-body">
+            <h3>Create your account</h3>
+            <p>Sign up free with email or GitHub. No credit card, no commitment.</p>
+          </div>
+        </div>
+        <div class="step-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <div class="step">
+          <div class="step-number">02</div>
+          <div class="step-body">
+            <h3>Generate your API key</h3>
+            <p>Create scoped keys with per-project rate limits and usage tracking.</p>
+          </div>
+        </div>
+        <div class="step-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <div class="step">
+          <div class="step-number">03</div>
+          <div class="step-body">
+            <h3>Integrate in one line</h3>
+            <p>Install the SDK or call the REST API. Swap models without changing code.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── PRICING ─────────── -->
+    <section id="pricing" class="section section-alt">
+      <div class="section-head section-head-center">
+        <span class="eyebrow">Pricing</span>
+        <h2 class="section-title">Simple, transparent pricing.</h2>
+        <p class="section-lead">Start free. Scale when you're ready. No hidden fees, no per-seat charges.</p>
+      </div>
+
+      <div class="pricing-toggle" role="tablist" aria-label="Billing period">
+        <button class="pricing-tab is-active" type="button" role="tab" aria-selected="true" data-pricing-tab="monthly">Monthly</button>
+        <button class="pricing-tab" type="button" role="tab" aria-selected="false" data-pricing-tab="yearly">
+          Yearly <span class="save-badge">Save 20%</span>
+        </button>
+      </div>
+
+      <!-- Monthly -->
+      <div class="pricing-wrapper is-active" data-tab="monthly" role="tabpanel">
+        <div class="pricing-grid">
+          <article class="plan-card">
+            <div class="plan-header">
+              <h3>Starter</h3>
+              <p class="plan-desc">Perfect for side projects and prototypes.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">Free</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> 10,000 tokens / month</li>
+              <li><i class="fa-solid fa-check"></i> 1 API key</li>
+              <li><i class="fa-solid fa-check"></i> All 200+ models</li>
+              <li><i class="fa-solid fa-check"></i> Community support</li>
+            </ul>
+            <button type="button" class="plan-cta plan-cta-secondary" data-plan="Starter (Free)">Start for free</button>
+          </article>
+
+          <article class="plan-card plan-featured">
+            <div class="plan-badge">Most popular</div>
+            <div class="plan-header">
+              <h3>Pro</h3>
+              <p class="plan-desc">For indie developers shipping real products.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">$19</span>
+              <span class="price-per">/ month</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> 1M tokens / month</li>
+              <li><i class="fa-solid fa-check"></i> 5 API keys</li>
+              <li><i class="fa-solid fa-check"></i> Priority routing</li>
+              <li><i class="fa-solid fa-check"></i> Usage analytics</li>
+              <li><i class="fa-solid fa-check"></i> Email support</li>
+            </ul>
+            <button type="button" class="plan-cta" data-plan="Pro (Monthly)">Upgrade to Pro</button>
+          </article>
+
+          <article class="plan-card">
+            <div class="plan-header">
+              <h3>Scale</h3>
+              <p class="plan-desc">For teams with production workloads.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">Custom</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Unlimited tokens</li>
+              <li><i class="fa-solid fa-check"></i> Unlimited keys</li>
+              <li><i class="fa-solid fa-check"></i> 99.99% SLA</li>
+              <li><i class="fa-solid fa-check"></i> SSO &amp; RBAC</li>
+              <li><i class="fa-solid fa-check"></i> Dedicated support</li>
+            </ul>
+            <button type="button" class="plan-cta plan-cta-secondary" data-plan="Scale (Custom)">Talk to sales</button>
+          </article>
+        </div>
+      </div>
+
+      <!-- Yearly -->
+      <div class="pricing-wrapper" data-tab="yearly" role="tabpanel">
+        <div class="pricing-grid">
+          <article class="plan-card">
+            <div class="plan-header">
+              <h3>Starter</h3>
+              <p class="plan-desc">Perfect for side projects and prototypes.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">Free</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> 10,000 tokens / month</li>
+              <li><i class="fa-solid fa-check"></i> 1 API key</li>
+              <li><i class="fa-solid fa-check"></i> All 200+ models</li>
+              <li><i class="fa-solid fa-check"></i> Community support</li>
+            </ul>
+            <button type="button" class="plan-cta plan-cta-secondary" data-plan="Starter (Free)">Start for free</button>
+          </article>
+
+          <article class="plan-card plan-featured">
+            <div class="plan-badge">Save $48 / year</div>
+            <div class="plan-header">
+              <h3>Pro</h3>
+              <p class="plan-desc">For indie developers shipping real products.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">$15</span>
+              <span class="price-per">/ month</span>
+            </div>
+            <p class="plan-note">Billed $180 / year</p>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> 1M tokens / month</li>
+              <li><i class="fa-solid fa-check"></i> 5 API keys</li>
+              <li><i class="fa-solid fa-check"></i> Priority routing</li>
+              <li><i class="fa-solid fa-check"></i> Usage analytics</li>
+              <li><i class="fa-solid fa-check"></i> Email support</li>
+            </ul>
+            <button type="button" class="plan-cta" data-plan="Pro (Yearly)">Upgrade to Pro</button>
+          </article>
+
+          <article class="plan-card">
+            <div class="plan-header">
+              <h3>Scale</h3>
+              <p class="plan-desc">For teams with production workloads.</p>
+            </div>
+            <div class="plan-price">
+              <span class="price-value">Custom</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Unlimited tokens</li>
+              <li><i class="fa-solid fa-check"></i> Unlimited keys</li>
+              <li><i class="fa-solid fa-check"></i> 99.99% SLA</li>
+              <li><i class="fa-solid fa-check"></i> SSO &amp; RBAC</li>
+              <li><i class="fa-solid fa-check"></i> Dedicated support</li>
+            </ul>
+            <button type="button" class="plan-cta plan-cta-secondary" data-plan="Scale (Custom)">Talk to sales</button>
+          </article>
+        </div>
+      </div>
+
+      <p class="pricing-disclaimer">
+        All plans include automatic failover, request caching, and full observability.
+      </p>
+    </section>
+
+    <!-- ─────────── DOCS PREVIEW ─────────── -->
+    <section class="section">
+      <div class="section-head">
+        <span class="eyebrow">Documentation</span>
+        <h2 class="section-title">Developer-first docs.</h2>
+        <p class="section-lead">
+          Quickstart guides, reference docs, and copy-paste examples in the
+          language you're using. No signup to read.
+        </p>
+      </div>
+
+      <div class="docs-preview">
+        <div class="docs-tabs" role="tablist" aria-label="Code language">
+          <button class="code-tab is-active" type="button" role="tab" aria-selected="true" data-code-tab="curl">cURL</button>
+          <button class="code-tab" type="button" role="tab" aria-selected="false" data-code-tab="js">JavaScript</button>
+          <button class="code-tab" type="button" role="tab" aria-selected="false" data-code-tab="python">Python</button>
+        </div>
+
+        <div class="code-tab-panel is-active" data-code-panel="curl">
+          <button class="copy-btn copy-btn-float" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+<pre><code>curl https://api.nexora.ai/v1/chat/completions \
+  -H <span class="s">"Authorization: Bearer $NEXORA_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "model": "gpt-4o",
+    "messages": [
+      { "role": "user", "content": "Hello!" }
+    ],
+    "stream": false
+  }'</span></code></pre>
+        </div>
+
+        <div class="code-tab-panel" data-code-panel="js">
+          <button class="copy-btn copy-btn-float" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+<pre><code><span class="k">import</span> Nexora <span class="k">from</span> <span class="s">'@nexora/sdk'</span>;
+
+<span class="k">const</span> client = <span class="k">new</span> <span class="f">Nexora</span>({
+  apiKey: process.env.NEXORA_KEY
+});
+
+<span class="k">const</span> result = <span class="k">await</span> client.chat.<span class="f">create</span>({
+  model: <span class="s">'gpt-4o'</span>,
+  messages: [{ role: <span class="s">'user'</span>, content: <span class="s">'Hello!'</span> }]
+});</code></pre>
+        </div>
+
+        <div class="code-tab-panel" data-code-panel="python">
+          <button class="copy-btn copy-btn-float" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+<pre><code><span class="k">from</span> nexora <span class="k">import</span> Nexora
+
+client = <span class="f">Nexora</span>(api_key=os.environ[<span class="s">"NEXORA_KEY"</span>])
+
+response = client.chat.<span class="f">create</span>(
+    model=<span class="s">"gpt-4o"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Hello!"</span>}]
+)</code></pre>
+        </div>
+
+        <a href="./docs.html" class="docs-cta">
+          Read the full documentation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────────── FINAL CTA ─────────── -->
+    <section class="final-cta">
+      <div class="final-cta-inner">
+        <h2>Your next big idea starts with an API call.</h2>
+        <p>Get a free API key in seconds. Ship your first AI feature today.</p>
+        <div class="final-cta-actions">
+          <button type="button" class="btn-primary btn-lg" data-open-signup aria-haspopup="dialog">
+            Get Your Free API Key
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <a href="./docs.html" class="btn-secondary btn-lg">Read the docs</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SIGNUP MODAL
+       ═══════════════════════════════════════════════════════════ -->
+  <dialog id="signupModal" aria-labelledby="signupTitle">
+    <div class="modal-content">
+      <button id="closeModalBtn" class="close-modal" type="button" aria-label="Close">×</button>
+      <h2 id="signupTitle">Get your API key</h2>
+      <p id="planLabel" class="plan-label" hidden></p>
+      <p class="modal-sub">Free forever. No credit card required.</p>
+
+      <form id="signupForm" class="signup-form" novalidate>
+        <label for="username">Full name</label>
+        <input id="username" name="username" type="text" autocomplete="name" required />
+        <div id="usernameError" class="error-message" role="alert">Please enter your name</div>
+
+        <label for="email">Work email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+        <div id="emailError" class="error-message" role="alert">Enter a valid email</div>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+        <div id="passwordError" class="error-message" role="alert">Password must be at least 8 characters</div>
+
+        <button type="submit" class="btn-primary btn-full">
+          Create account
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+
+        <p class="modal-terms">
+          By signing up you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+        </p>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- BACK TO TOP -->
+  <button id="backToTopBtn" class="back-to-top-btn" type="button" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./home.html" class="brand">
+            <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true">
+              <defs>
+                <linearGradient id="brandGradFooter" x1="0" y1="0" x2="32" y2="32">
+                  <stop stop-color="#a78bfa" />
+                  <stop offset="1" stop-color="#22d3ee" />
+                </linearGradient>
+              </defs>
+              <rect width="32" height="32" rx="8" fill="url(#brandGradFooter)" />
+              <path d="M10 22V10l12 12V10" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="brand-text">Nexora</span>
+          </a>
+          <p class="footer-tagline">One unified API for every AI model.</p>
+          <div class="footer-social">
+            <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://github.com" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://discord.com" aria-label="Discord" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#playground-preview">Playground</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <ul>
+            <li><a href="./docs.html">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">SDKs</a></li>
+            <li><a href="#">Examples</a></li>
+            <li><a href="#">Discord</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year">2025</span> Nexora Inc. All rights reserved.</p>
+        <p class="footer-note">Built for developers · SOC 2 Type II · GDPR compliant</p>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <p style="text-align:center;padding:20px;color:#94a3b8;">
+      Please enable JavaScript to use the interactive playground and pricing toggles.
+    </p>
+  </noscript>
+</body>
+</html>
